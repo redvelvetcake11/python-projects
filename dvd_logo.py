@@ -1,3 +1,9 @@
+"""
+Animated ASCII art of a DVD logo bouncing around the screen.
+
+This program was created from the project 5 of the book "The Big Book of Small Python Projects"
+"""
+
 import sys, random, time
 
 try:
@@ -25,6 +31,10 @@ Y = 'y'
 DIR = 'direction'
 
 def main():
+    """
+    Run the animated ASCII art of the DVD logo bouncing around the
+    screen.
+    """
     bext.clear()
 
     logos = []
@@ -35,6 +45,7 @@ def main():
 
     cornerBounces = 0
     while True:
+        # Move and draw all the logos
         for logo in logos:
             bext.goto(logo[X], logo[Y])
             print(' ', end='')
@@ -94,14 +105,18 @@ def main():
             logo[X] = max(0, min(logo[X], WIDTH - 3))
             logo[Y] = max(0, min(logo[Y], HEIGHT))
 
+        # Print the number of corner bounces
         bext.goto(4, 0)
         bext.fg('white')
         print('Corner bounces: ', cornerBounces, end='')
+
+        # Redraw all the logos
         for logo in logos:
             bext.goto(logo[X], logo[Y])
             bext.fg(logo[COLOR])
             print('DVD', end='')
 
+        # Update the screen
         bext.goto(0, 0)
         sys.stdout.flush()
         time.sleep(PAUSE_AMOUNT)
@@ -113,3 +128,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print("Gracefully exiting")
         sys.exit()
+
